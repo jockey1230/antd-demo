@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import {observer} from 'mobx-react';
+import {Button} from 'antd';
+import cherriesModel from "./model/cherries"
 import './App.css';
 
+@observer
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    render() {
+        const cherries = cherriesModel;
+
+        let html = " ";
+        for (let n = 0; n < cherries.number; n++) {
+            html += "🍒"
+        }
+
+        return (
+            <div className="App">
+                <div>{html}</div>
+                <Button style={{marginRight:10}} type="primary" onClick={cherries.add}>Add</Button>
+                <Button type="primary" onClick={cherries.delete}>Delete</Button>
+
+            </div>
+        );
+    }
 }
 
 export default App;
